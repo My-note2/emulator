@@ -36,6 +36,18 @@
     <ClInclude Include="IconStatic.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="BkDialogST.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Button\BCMenu.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Button\BtnST.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Button\CeXDib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="resembleEmule.cpp">
@@ -48,6 +60,18 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="IconStatic.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="BkDialogST.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Button\BCMenu.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Button\BtnST.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Button\CeXDib.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

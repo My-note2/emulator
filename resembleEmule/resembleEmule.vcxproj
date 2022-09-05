@@ -91,7 +91,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -189,6 +189,10 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BkDialogST.h" />
+    <ClInclude Include="Button\BCMenu.h" />
+    <ClInclude Include="Button\BtnST.h" />
+    <ClInclude Include="Button\CeXDib.h" />
     <ClInclude Include="EmuleDlg.h" />
     <ClInclude Include="IconStatic.h" />
     <ClInclude Include="resembleEmule.h" />
@@ -197,6 +201,10 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BkDialogST.cpp" />
+    <ClCompile Include="Button\BCMenu.cpp" />
+    <ClCompile Include="Button\BtnST.cpp" />
+    <ClCompile Include="Button\CeXDib.cpp" />
     <ClCompile Include="EmuleDlg.cpp" />
     <ClCompile Include="IconStatic.cpp" />
     <ClCompile Include="resembleEmule.cpp" />

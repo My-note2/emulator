@@ -50,18 +50,19 @@ END_MESSAGE_MAP()
 
 
 CEmuleDlg::CEmuleDlg(CWnd* pParent /*=NULL*/)
-	: CDialogEx(IDD_RESEMBLEEMULE_DIALOG, pParent)
+	: CBkDialogST(IDD_RESEMBLEEMULE_DIALOG, pParent)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
 
 void CEmuleDlg::DoDataExchange(CDataExchange* pDX)
 {
-	CDialogEx::DoDataExchange(pDX);
+	CBkDialogST::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_MYINFO, m_ctrlMyInfoFrm);
+	DDX_Control(pDX, IDC_BUTTON1, m_btn_set);
 }
 
-BEGIN_MESSAGE_MAP(CEmuleDlg, CDialogEx)
+BEGIN_MESSAGE_MAP(CEmuleDlg, CBkDialogST)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
@@ -72,7 +73,7 @@ END_MESSAGE_MAP()
 
 BOOL CEmuleDlg::OnInitDialog()
 {
-	CDialogEx::OnInitDialog();
+	CBkDialogST::OnInitDialog();
 
 	// 将“关于...”菜单项添加到系统菜单中。
 
@@ -100,13 +101,17 @@ BOOL CEmuleDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// 设置小图标
 
 	// TODO: 在此添加额外的初始化代码
-	CBitmap bmp;
-	BITMAP bitmap;
-	bmp.LoadBitmap(IDB_HOME);
-	bmp.GetBitmap(&bitmap);
-	MoveWindow(0, 0, bitmap.bmWidth, bitmap.bmHeight);
-	SetBackgroundImage(IDB_HOME);
+	//CBitmap bmp;
+	//BITMAP bitmap;
+	//bmp.LoadBitmap(IDB_HOME);
+	//bmp.GetBitmap(&bitmap);
+	//MoveWindow(0, 0, bitmap.bmWidth, bitmap.bmHeight);
+	//SetBackgroundImage(IDB_HOME);
 	//m_ctrlMyInfoFrm.SetIcon(_T("INFO"));
+	SetBitmap(IDB_HOME);
+
+	m_ctrlMyInfoFrm.DrawTransparent();
+	m_btn_set.DrawTransparent();
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
 
@@ -119,7 +124,7 @@ void CEmuleDlg::OnSysCommand(UINT nID, LPARAM lParam)
 	}
 	else
 	{
-		CDialogEx::OnSysCommand(nID, lParam);
+		CBkDialogST::OnSysCommand(nID, lParam);
 	}
 }
 
@@ -148,7 +153,7 @@ void CEmuleDlg::OnPaint()
 	}
 	else
 	{
-		CDialogEx::OnPaint();
+		CBkDialogST::OnPaint();
 	}
 }
 
@@ -158,4 +163,3 @@ HCURSOR CEmuleDlg::OnQueryDragIcon()
 {
 	return static_cast<HCURSOR>(m_hIcon);
 }
-
