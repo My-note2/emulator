@@ -7,6 +7,9 @@
 #include "EmuleDlg.h"
 #include "afxdialogex.h"
 
+#include "HomeWnd.h"
+#include "ReviewListWnd.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -50,22 +53,33 @@ END_MESSAGE_MAP()
 
 
 CEmuleDlg::CEmuleDlg(CWnd* pParent /*=NULL*/)
-	: CBkDialogST(IDD_RESEMBLEEMULE_DIALOG, pParent)
+	: CDialogEx(IDD_RESEMBLEEMULE_DIALOG, pParent)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+
+	m_homewnd = new CHomeWnd();
+	m_reviewlistwnd = new CReviewListWnd();
 }
 
+CEmuleDlg::~CEmuleDlg()
+{
+	delete m_homewnd;
+	delete m_reviewlistwnd;
+}
 void CEmuleDlg::DoDataExchange(CDataExchange* pDX)
 {
-	CBkDialogST::DoDataExchange(pDX);
+	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_MYINFO, m_ctrlMyInfoFrm);
 	DDX_Control(pDX, IDC_BUTTON1, m_btn_set);
 }
 
-BEGIN_MESSAGE_MAP(CEmuleDlg, CBkDialogST)
+BEGIN_MESSAGE_MAP(CEmuleDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_WM_SIZE()
+
+	ON_MESSAGE(WM_WINDOW_CHANGES, OnChangeWindow)
 END_MESSAGE_MAP()
 
 
@@ -73,7 +87,7 @@ END_MESSAGE_MAP()
 
 BOOL CEmuleDlg::OnInitDialog()
 {
-	CBkDialogST::OnInitDialog();
+	CDialogEx::OnInitDialog();
 
 	// 将“关于...”菜单项添加到系统菜单中。
 
@@ -108,8 +122,14 @@ BOOL CEmuleDlg::OnInitDialog()
 	//MoveWindow(0, 0, bitmap.bmWidth, bitmap.bmHeight);
 	//SetBackgroundImage(IDB_HOME);
 	//m_ctrlMyInfoFrm.SetIcon(_T("INFO"));
-	SetBitmap(IDB_HOME);
+	//SetBitmap(IDB_HOME);
 
+	m_homewnd->Create(IDD_HOME);
+	m_reviewlistwnd->Create(IDD_REVIEWLIST);
+	//SetActiveDialog(m_home);
+	m_homewnd->SetParent(this);
+	m_homewnd->ShowWindow(SW_SHOW);
+	m_homewnd->UpdateWindow();
 	m_ctrlMyInfoFrm.DrawTransparent();
 	m_btn_set.DrawTransparent();
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
@@ -124,7 +144,7 @@ void CEmuleDlg::OnSysCommand(UINT nID, LPARAM lParam)
 	}
 	else
 	{
-		CBkDialogST::OnSysCommand(nID, lParam);
+		CDialogEx::OnSysCommand(nID, lParam);
 	}
 }
 
@@ -153,7 +173,7 @@ void CEmuleDlg::OnPaint()
 	}
 	else
 	{
-		CBkDialogST::OnPaint();
+		CDialogEx::OnPaint();
 	}
 }
 
@@ -162,4 +182,35 @@ void CEmuleDlg::OnPaint()
 HCURSOR CEmuleDlg::OnQueryDragIcon()
 {
 	return static_cast<HCURSOR>(m_hIcon);
+}
+
+
+void CEmuleDlg::OnSize(UINT nType, int cx, int cy)
+{
+	CDialogEx::OnSize(nType, cx, cy);
+
+	// TODO: 在此处添加消息处理程序代码
+	if (m_homewnd->m_hWnd)
+		m_homewnd->MoveWindow(0, 0, cx, cy);
+	if (m_reviewlistwnd->m_hWnd)
+		m_reviewlistwnd->MoveWindow(0, 0, cx, cy);
+}
+
+LRESULT CEmuleDlg::OnChangeWindow(WPARAM wParam, LPARAM lParam)
+{
+	int nWnd = (int)wParam;
+	if (nWnd == 1)
+	{
+		m_reviewlistwnd->ShowWindow(SW_HIDE);
+		m_homewnd->ShowWindow(SW_SHOW);
+		m_homewnd->UpdateData();
+	}
+	else
+	{
+		m_homewnd->ShowWindow(SW_HIDE);
+		m_reviewlistwnd->ShowWindow(SW_SHOW);
+		m_reviewlistwnd->UpdateData();
+	}
+
+	return TRUE;
 }

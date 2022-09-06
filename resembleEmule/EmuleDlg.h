@@ -5,16 +5,19 @@
 #pragma once
 #include "afxwin.h"
 
-#include "BkDialogST.h"
 #include "IconStatic.h"
-#include "./Button/BtnST.h"
+#include "BtnST.h"
+//#include "nlohmann/json.hpp"
+//using json = nlohmann::json;
 // CEmuleDlg 对话框
-class CEmuleDlg : public CBkDialogST
+class CHomeWnd;
+class CReviewListWnd;
+class CEmuleDlg : public CDialogEx
 {
 // 构造
 public:
 	CEmuleDlg(CWnd* pParent = NULL);	// 标准构造函数
-
+	~CEmuleDlg();
 	// 对话框数据
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_RESEMBLEEMULE_DIALOG };
@@ -33,10 +36,17 @@ protected:
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
+	afx_msg LRESULT OnChangeWindow(WPARAM wParam, LPARAM lParam);
 	DECLARE_MESSAGE_MAP()
 public:
 
 	CButtonST m_ctrlMyInfoFrm;
 
 	CButtonST m_btn_set;
+
+private:
+	CHomeWnd* m_homewnd;
+	CReviewListWnd* m_reviewlistwnd;
+public:
+	afx_msg void OnSize(UINT nType, int cx, int cy);
 };

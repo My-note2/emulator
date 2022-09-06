@@ -10,7 +10,7 @@
 
 #include "resource.h"		// 主符号
 
-
+#include "UIMsg.h"
 // EmuleApp: 
 // 有关此类的实现，请参阅 resembleEmule.cpp
 //
